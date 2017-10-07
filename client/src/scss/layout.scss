@@ -1,0 +1,106 @@
+@import "~bulma/sass/utilities/initial-variables";
+
+$primary: #23d160;
+$danger: rgba(186, 16, 81, 0.49);
+// $primary: hsl(210, 27%, 88%);
+
+
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma/sass/utilities/controls";
+// @import "~bulma/sass/base/generic";
+@import "~bulma/sass/base/_all";
+@import "~bulma/sass/grid/columns";
+@import "~bulma/sass/elements/button";
+@import "~bulma/sass/components/nav";
+@import "~bulma/sass/components/navbar";
+@import "~bulma/sass/components/pagination";
+@import "~bulma/sass/components/message";
+@import "~bulma/sass/layout/section";
+@import "~bulma/sass/elements/form";
+@import "~bulma/sass/elements/table";
+@import "~bulma/sass/elements/title";
+
+/* track page */
+input[type="datetime-local"] {
+  border-color: rgb(219, 219, 219);
+  padding: 5 9;
+  font-size: 1em;
+  border-style: solid;
+  border-width: 1px;
+  color: rgb(54, 54, 54);
+}
+
+input[type="checkbox"] {
+  margin-top: 10px;
+}
+
+/* meals table */
+.pagination a {
+  outline: none;
+}
+
+
+/* add food page */
+/* #addFoodTableTitle {
+  margin-bottom: 57px;
+} */
+
+
+/* @keyframes exit-message {
+  0% {
+  	opacity: 1;
+  }
+  77% {
+  	opacity: 1;
+  }
+  100% {
+  	opacity: 0;
+  }
+}
+
+.show-message {
+  opacity: 0;
+  animation: exit-message 4s ease;
+} */
+
+/* html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+} */
+
+/* td > .button.is-danger {
+  margin-right: 5px;
+} */
+
+/* 
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background: #eee;
+  margin: 0 0 20px 0;
+}
+
+nav > * {
+  margin: 0 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+} */
+
+/* main {
+  margin: 20px;
+} */
+
+
+/* .flex {
+  display: flex;
+  width: 500px;
+  justify-content: space-around;
+} */
