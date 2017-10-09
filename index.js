@@ -36,7 +36,7 @@ const apiRoutes = require('./server/routes/api');
 const defaultRoute = require('./server/routes/defaultRoute');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-app.use('/', defaultRoute); 
+app.use('*', defaultRoute); 
 
 // start the server
 app.listen(process.env.PORT, () => {
