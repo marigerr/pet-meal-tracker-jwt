@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from './pagination/PaginationBoxView';
 // import Track from './Track.jsx';
 import MealTable from './MealTable.jsx';
 
