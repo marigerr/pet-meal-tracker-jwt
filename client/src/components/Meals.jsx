@@ -30,7 +30,7 @@ export default class Meals extends React.Component {
   }
 
   loadMealsFromServer() {
-    axios.get('http://localhost:3000/api/meals').then((result) => {
+    axios.get('/api/meals').then((result) => {
       console.log(result);
       if (result.data.message === 'unauthorized') {
         console.log('you need to log in');

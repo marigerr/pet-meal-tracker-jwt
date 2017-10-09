@@ -43,7 +43,7 @@ export default class Addfood extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/api/track').then((result) => {
+    axios.get('/api/track').then((result) => {
       if (result.data.message === 'unauthorized') {
         // console.log('you need to log in');
         // window.location.href = 'http://localhost:3000/api/auth';

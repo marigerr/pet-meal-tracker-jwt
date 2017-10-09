@@ -20,7 +20,7 @@ export default class Stats extends React.Component {
 
   componentDidMount() {
     document.title = 'Tracker - Stats';
-    axios.get('http://localhost:3000/api/stats').then((result) => {
+    axios.get('/api/stats').then((result) => {
       if (result.data.message === 'unauthorized') {
         // window.location.href = 'http://localhost:3000/api/auth';
       } else {

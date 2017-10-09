@@ -32,7 +32,7 @@ export default class Track extends React.Component {
 
   componentDidMount() {
     document.title = 'Tracker - track';
-    axios.get('http://localhost:3000/api/track').then((result) => {
+    axios.get('/api/track').then((result) => {
       console.log(result.data);
       if (result.data.message === 'unauthorized') {
         console.log('you need to log in');
