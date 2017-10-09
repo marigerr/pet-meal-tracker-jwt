@@ -46704,11 +46704,11 @@ var Track = function (_React$Component) {
       var _this2 = this;
 
       document.title = 'Tracker - track';
-      _axios2.default.get('http://localhost:3000/api/track').then(function (result) {
+      _axios2.default.get('/api/track').then(function (result) {
         console.log(result.data);
         if (result.data.message === 'unauthorized') {
           console.log('you need to log in');
-          // window.location.href = 'http://localhost:3000/api/auth';
+          // window.location.href = '/api/auth';
         } else {
           _this2.setState({
             foodtypes: result.data
@@ -48163,10 +48163,10 @@ var Addfood = function (_React$Component) {
     value: function componentDidMount() {
       var _this3 = this;
 
-      _axios2.default.get('http://localhost:3000/api/track').then(function (result) {
+      _axios2.default.get('/api/track').then(function (result) {
         if (result.data.message === 'unauthorized') {
           // console.log('you need to log in');
-          // window.location.href = 'http://localhost:3000/api/auth';
+          // window.location.href = '/api/auth';
         } else if (result.data) {
           _this3.updateTable(result.data);
         }
@@ -48208,7 +48208,7 @@ var Addfood = function (_React$Component) {
       var _this6 = this;
 
       console.log(event.target.id);
-      _axios2.default.delete('http://localhost:3000/api/addfood', {
+      _axios2.default.delete('/api/addfood', {
         data: { _id: event.target.id }
       }).then(function (result) {
         console.log(result.data);
@@ -48482,9 +48482,9 @@ var Stats = function (_React$Component) {
       var _this2 = this;
 
       document.title = 'Tracker - Stats';
-      _axios2.default.get('http://localhost:3000/api/stats').then(function (result) {
+      _axios2.default.get('/api/stats').then(function (result) {
         if (result.data.message === 'unauthorized') {
-          // window.location.href = 'http://localhost:3000/api/auth';
+          // window.location.href = '/api/auth';
         } else {
           console.log(result.data);
           var datapoints = result.data;
@@ -65165,11 +65165,11 @@ var Meals = function (_React$Component) {
     value: function loadMealsFromServer() {
       var _this2 = this;
 
-      _axios2.default.get('http://localhost:3000/api/meals').then(function (result) {
+      _axios2.default.get('/api/meals').then(function (result) {
         console.log(result);
         if (result.data.message === 'unauthorized') {
           console.log('you need to log in');
-          // window.location.href = 'http://localhost:3000/api/auth';
+          // window.location.href = '/api/auth';
         } else {
           _this2.setState({
             wholeDataset: result.data
@@ -66132,7 +66132,7 @@ var MealTable = function (_React$Component) {
       var _this3 = this;
 
       console.log(event.target.id);
-      _axios2.default.delete('http://localhost:3000/api/meals', {
+      _axios2.default.delete('/api/meals', {
         data: { _id: event.target.id }
       }).then(function (result) {
         console.log(result.data.mealId);
