@@ -1,7 +1,3 @@
-.babelrc
 .env
 changelog.txt
-.babelrc
 nodemon.json
-webpack.config.js
-.eslintrc.json
