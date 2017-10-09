@@ -46,7 +46,7 @@ export default class Addfood extends React.Component {
     axios.get('/api/track').then((result) => {
       if (result.data.message === 'unauthorized') {
         // console.log('you need to log in');
-        // window.location.href = 'http://localhost:3000/api/auth';
+        // window.location.href = '/api/auth';
       } else if(result.data) {
         this.updateTable(result.data);
       }
@@ -79,7 +79,7 @@ export default class Addfood extends React.Component {
 
   deleteFood(event) {
     console.log(event.target.id);
-    axios.delete('http://localhost:3000/api/addfood', {
+    axios.delete('/api/addfood', {
       data: { _id: event.target.id },
     }).then((result) => {
       console.log(result.data);

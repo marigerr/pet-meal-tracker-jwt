@@ -36,7 +36,7 @@ export default class Track extends React.Component {
       console.log(result.data);
       if (result.data.message === 'unauthorized') {
         console.log('you need to log in');
-        // window.location.href = 'http://localhost:3000/api/auth';
+        // window.location.href = '/api/auth';
       } else {
         this.setState({
           foodtypes: result.data,

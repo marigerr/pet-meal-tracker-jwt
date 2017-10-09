@@ -41,7 +41,7 @@ export default class MealTable extends React.Component {
 
   deleteMeal(event) {
     console.log(event.target.id);
-    axios.delete('http://localhost:3000/api/meals', {
+    axios.delete('/api/meals', {
       data: { _id: event.target.id },
     }).then((result) => {
       console.log(result.data.mealId);
