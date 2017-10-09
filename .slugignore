@@ -1,4 +1,3 @@
-client/src/*
 .babelrc
 .env
 changelog.txt

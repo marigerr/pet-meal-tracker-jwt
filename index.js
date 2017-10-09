@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const helmet = require('helmet')
@@ -10,8 +11,9 @@ require('./server/models').connect(process.env.DATABASE);
 const app = express();
 // tell the app to look for static files in these directories
 app.use(helmet());
-app.use(express.static('./server/static/'));
-app.use(express.static('./client/dist/'));
+app.use(express.static(path.join(__dirname, 'server/static')));
+app.use(express.static(path.join(__dirname, 'client/dist/js')));
+// app.use(express.static('./client/'));
 // tell the app to parse HTTP body messages
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,9 +36,9 @@ const apiRoutes = require('./server/routes/api');
 const defaultRoute = require('./server/routes/defaultRoute');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-app.use('/*', defaultRoute); 
+app.use('/', defaultRoute); 
 
 // start the server
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000 or http://127.0.0.1:3000');
+app.listen(process.env.PORT, () => {
+  console.log('Server is listening');
 });
