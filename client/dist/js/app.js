@@ -66151,41 +66151,49 @@ var MealTable = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'table',
-        { className: 'table is-striped' },
+        'div',
+        { className: 'columns' },
         _react2.default.createElement(
-          'thead',
-          null,
+          'div',
+          { className: 'column is-half' },
           _react2.default.createElement(
-            'tr',
-            null,
+            'table',
+            { className: 'table is-narrow is-striped' },
             _react2.default.createElement(
-              'th',
+              'thead',
               null,
-              'Name'
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Name'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Package Portion'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Daily Percent'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Time'
+                ),
+                _react2.default.createElement('th', null)
+              )
             ),
             _react2.default.createElement(
-              'th',
+              'tbody',
               null,
-              'Package Portion'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'Daily Percent'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'Time'
-            ),
-            _react2.default.createElement('th', null)
+              this.state.mealTableRows
+            )
           )
-        ),
-        _react2.default.createElement(
-          'tbody',
-          null,
-          this.state.mealTableRows
         )
       );
     }
