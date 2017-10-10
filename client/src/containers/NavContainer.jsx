@@ -3,20 +3,33 @@ import PropTypes from 'prop-types';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
 import '../images/pawprintWhite24.png';
+import axios from 'axios';
+
 
 class NavContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: '',
       navbarMenuClassNames: 'navbar-menu',
       navbarBurgerClassNames: 'button navbar-burger',
     };
   }
 
+  componentDidMount() {
+    if (Auth.isUserAuthenticated()) {
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+      axios.get('/api/dashboard').then((result) => {
+        if (result.status === 200) {
+          this.setState({
+            username: result.data.username
+          });
+        }
+      });
+    }
+  }
+
   openNavbarMenu(event) {
-    console.log(event.target.className);
-    console.log(event.target.className.search('is-active'));
-    console.log(event.target.className.search('is-active') === -1);
     if (event.target.className.search('is-active') === -1) {
       this.setState({
         navbarMenuClassNames: 'navbar-menu is-active',
@@ -63,6 +76,7 @@ class NavContainer extends React.Component {
 
               {Auth.isUserAuthenticated() ? (
                 <div className="navbar-end">
+                  <Link to="/account" className="navbar-item">{this.state.username}</Link>
                   <Link to="/logout" className="navbar-item">Log out</Link>
                 </div>
               ) : (

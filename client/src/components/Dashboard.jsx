@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Dashboard = ({ secretData }) => (
   <div className="container">
     <h1 className="title">Pet Meal Tracker</h1>
-    <h2>Add information here, lots of info</h2>
+    <h2>User's Home Page - add latest stats, meals etc</h2>
   </div>
 );
 

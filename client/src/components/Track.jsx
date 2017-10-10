@@ -30,13 +30,11 @@ export default class Track extends React.Component {
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem('token'));
     document.title = 'Tracker - track';
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
     axios.get('/api/track').then((result) => {
 
       if (result.data.message === 'unauthorized') {
-        // window.location.href = '/api/auth';
       } else {
         this.setState({
           foodtypes: result.data,

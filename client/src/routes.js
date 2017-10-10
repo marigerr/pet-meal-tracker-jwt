@@ -1,27 +1,25 @@
-import NavContainer from './components/NavContainer.jsx';
-import HomePage from './components/HomePage.jsx';
-import DashboardPage from './containers/DashboardPage.jsx';
-import TrackPage from './containers/TrackPage.jsx';
-import AddfoodPage from './containers/AddfoodPage.jsx';
-import StatsPage from './containers/StatsPage.jsx';
-import MealsPage from './containers/MealsPage.jsx';
+import NavContainer from './containers/NavContainer.jsx';
+import Home from './components/Home.jsx';
+import Dashboard from './components/Dashboard.jsx';
+import Track from './components/Track.jsx';
+import Addfood from './components/Addfood.jsx';
+import Stats from './components/Stats.jsx';
+import Meals from './components/Meals.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import Auth from './modules/Auth';
 
 
 const routes = {
-  // base component (wrapper for the whole application).
   component: NavContainer,
   childRoutes: [
-
     {
       path: '/',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, DashboardPage);
+          callback(null, Dashboard);
         } else {
-          callback(null, HomePage);
+          callback(null, Home);
         }
       }
     },
@@ -29,7 +27,7 @@ const routes = {
       path: '/track',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, TrackPage);
+          callback(null, Track);
         } else {
           callback(null, LoginPage);
         }
@@ -40,7 +38,7 @@ const routes = {
       path: '/addfood',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, AddfoodPage);
+          callback(null, Addfood);
         } else {
           callback(null, LoginPage);
         }
@@ -51,7 +49,7 @@ const routes = {
       path: '/meals',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, MealsPage);
+          callback(null, Meals);
         } else {
           callback(null, LoginPage);
         }
@@ -62,7 +60,7 @@ const routes = {
       path: '/stats',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, StatsPage);
+          callback(null, Stats);
         } else {
           callback(null, LoginPage);
         }
