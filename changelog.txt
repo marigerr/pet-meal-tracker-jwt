@@ -1,5 +1,6 @@
 ToDo
 -------------------------------------
+add edit function to account
 fix pagination delete item error
 fix colors / design
 add google login
@@ -11,5 +12,6 @@ configure prettier with eslint- https://hackernoon.com/configure-eslint-prettier
 
 Done
 --------------------------------------
+add account page
 fix pagination active class - done : added files locally
 drop database on mlab - created new database instead

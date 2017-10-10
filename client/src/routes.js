@@ -5,6 +5,7 @@ import Track from './components/Track.jsx';
 import Addfood from './components/Addfood.jsx';
 import Stats from './components/Stats.jsx';
 import Meals from './components/Meals.jsx';
+import Account from './components/Account.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import Auth from './modules/Auth';
@@ -65,7 +66,17 @@ const routes = {
           callback(null, LoginPage);
         }
       }
-    },     
+    },  
+    {
+      path: '/account',
+      getComponent: (location, callback) => {
+        if (Auth.isUserAuthenticated()) {
+          callback(null, Account);
+        } else {
+          callback(null, LoginPage);
+        }
+      }
+    },          
 
     {
       path: '/login',
