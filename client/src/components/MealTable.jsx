@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-
 export default class MealTable extends React.Component {
   constructor(props) {
     super(props);
@@ -40,7 +38,7 @@ export default class MealTable extends React.Component {
 
 
   deleteMeal(event) {
-    
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
     axios.delete('/api/meals', {
       data: { _id: event.target.id },
     }).then((result) => {

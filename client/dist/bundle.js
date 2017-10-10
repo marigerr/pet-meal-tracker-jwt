@@ -46231,6 +46231,10 @@ var _Auth2 = _interopRequireDefault(_Auth);
 
 __webpack_require__(414);
 
+var _axios = __webpack_require__(45);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46248,18 +46252,42 @@ var NavContainer = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (NavContainer.__proto__ || Object.getPrototypeOf(NavContainer)).call(this, props));
 
     _this.state = {
+      username: '',
       navbarMenuClassNames: 'navbar-menu',
       navbarBurgerClassNames: 'button navbar-burger'
     };
+    console.log(_this.state);
     return _this;
   }
 
+  // componentWillReceiveProps(nextProps){
+  //   if (this.state.username !== nextProps.username) {
+  //     this.setState({
+  //       username: nextProps.username
+  //     }, ()=> console.log(this.state));
+  //   }
+  // }
+
   _createClass(NavContainer, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+      _axios2.default.get('/api/dashboard').then(function (result) {
+        if (result.status === 200) {
+          console.log(result.data.username);
+          _this2.setState({
+            username: result.data.username
+          }, function () {
+            return console.log(_this2.state);
+          });
+        }
+      });
+    }
+  }, {
     key: 'openNavbarMenu',
     value: function openNavbarMenu(event) {
-      console.log(event.target.className);
-      console.log(event.target.className.search('is-active'));
-      console.log(event.target.className.search('is-active') === -1);
       if (event.target.className.search('is-active') === -1) {
         this.setState({
           navbarMenuClassNames: 'navbar-menu is-active',
@@ -46341,6 +46369,11 @@ var NavContainer = function (_React$Component) {
               _Auth2.default.isUserAuthenticated() ? _react2.default.createElement(
                 'div',
                 { className: 'navbar-end' },
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  { to: '/account', className: 'navbar-item' },
+                  this.state.username
+                ),
                 _react2.default.createElement(
                   _reactRouter.Link,
                   { to: '/logout', className: 'navbar-item' },
@@ -46453,54 +46486,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DashboardPage = function (_React$Component) {
   _inherits(DashboardPage, _React$Component);
 
-  /**
-   * Class constructor.
-   */
   function DashboardPage(props) {
     _classCallCheck(this, DashboardPage);
 
     var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
 
-    _this.state = {
-      secretData: ''
-    };
+    _this.state = {};
     return _this;
   }
 
-  /**
-   * This method will be executed after initial rendering.
-   */
-
-
   _createClass(DashboardPage, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var xhr = new XMLHttpRequest();
-      xhr.open('get', '/api/dashboard');
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      // set the authorization HTTP header
-      xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
-      xhr.responseType = 'json';
-      xhr.addEventListener('load', function () {
-        if (xhr.status === 200) {
-          _this2.setState({
-            secretData: xhr.response.message
-          });
-        }
-      });
-      xhr.send();
-    }
-
-    /**
-     * Render the component.
-     */
-
-  }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData });
+      return _react2.default.createElement(_Dashboard2.default, null);
     }
   }]);
 
@@ -46672,8 +46670,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-_axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-
 var Track = function (_React$Component) {
   _inherits(Track, _React$Component);
 
@@ -46700,7 +46696,6 @@ var Track = function (_React$Component) {
       // messageSuccess: 'has-text-success',
       // messageError: 'has-text-warning',
     };
-    console.log(_this.state);
 
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -46712,11 +46707,12 @@ var Track = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      console.log(localStorage.getItem('token'));
       document.title = 'Tracker - track';
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       _axios2.default.get('/api/track').then(function (result) {
-        console.log(result.data);
+
         if (result.data.message === 'unauthorized') {
-          console.log('you need to log in');
           // window.location.href = '/api/auth';
         } else {
           _this2.setState({
@@ -46736,42 +46732,27 @@ var Track = function (_React$Component) {
         }
       });
     }
-
-    // componentWillReceiveProps(nextProps) {
-    //   this.setState(nextProps);
-    //   console.log(this.state);
-    // }
-
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
-      var _this3 = this;
-
       var target = event.target;
       var value = target.type === 'checkbox' ? target.checked : target.value;
       var name = target.name;
-      console.log(event.target.name);
-      console.log(event.target.value);
-      console.log(event.target);
-      this.setState(_defineProperty({}, name, value), function () {
-        return console.log(_this3.state);
-      });
+      this.setState(_defineProperty({}, name, value));
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this4 = this;
+      var _this3 = this;
 
       event.preventDefault();
       var timezoneOffset = new Date().getTimezoneOffset() / 60;
       var timestampLocalDateTime = new Date(this.state.timestamp);
-
-      console.log(this.state.foodtypes);
       var foodtypesArr = this.state.foodtypes;
       var selectedFoodtype = foodtypesArr.find(function (food) {
-        return food._id === _this4.state.brandId;
+        return food._id === _this3.state.brandId;
       });
-      console.log(selectedFoodtype);
+
       _axios2.default.post('/api/track', {
         brand: selectedFoodtype.brand,
         amount: this.state.amount,
@@ -46779,8 +46760,7 @@ var Track = function (_React$Component) {
         openednewpackage: this.state.openednewpackage,
         timestamp: timestampLocalDateTime
       }).then(function (response) {
-        console.log(response.data);
-        _this4.setState({
+        _this3.setState({
           showMessage: true,
           addedmeal: true,
           addedmealBrand: response.data.meal.brand,
@@ -46789,8 +46769,7 @@ var Track = function (_React$Component) {
           addedmealtimestamp: response.data.meal.timestamp
         });
       }).catch(function (error) {
-        console.log(error);
-        _this4.setState({
+        _this3.setState({
           showMessage: true,
           addedmeal: false
         });
@@ -48097,8 +48076,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-_axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-
 var Addfood = function (_React$Component) {
   _inherits(Addfood, _React$Component);
 
@@ -48113,7 +48090,6 @@ var Addfood = function (_React$Component) {
       packageDailyEquivalent: '',
       foodTable: []
     };
-    console.log(_this.state);
 
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -48157,9 +48133,9 @@ var Addfood = function (_React$Component) {
         );
       });
       var currentTableBody = this.state.foodTable;
-      console.log(currentTableBody);
+
       var foodTable = currentTableBody.concat(newRow);
-      console.log(foodTable);
+
       this.setState({
         foodTable: foodTable,
         brand: '',
@@ -48172,6 +48148,7 @@ var Addfood = function (_React$Component) {
     value: function componentDidMount() {
       var _this3 = this;
 
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       _axios2.default.get('/api/track').then(function (result) {
         if (result.data.message === 'unauthorized') {
           // console.log('you need to log in');
@@ -48184,21 +48161,18 @@ var Addfood = function (_React$Component) {
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
-      var _this4 = this;
-
       var target = event.target;
       var value = target.type === 'checkbox' ? target.checked : target.value;
       var name = target.name;
-      this.setState(_defineProperty({}, name, value), function () {
-        return console.log(_this4.state);
-      });
+      this.setState(_defineProperty({}, name, value));
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this5 = this;
+      var _this4 = this;
 
       event.preventDefault();
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       _axios2.default.post('/api/addfood', {
         brand: this.state.brand,
         volume: this.state.volume,
@@ -48206,25 +48180,23 @@ var Addfood = function (_React$Component) {
       }).then(function (response) {
         var newFoodArray = [];
         newFoodArray.push(response.data.food);
-        _this5.updateTable(newFoodArray);
-      }).catch(function (error) {
-        console.log(error);
-      });
+        _this4.updateTable(newFoodArray);
+      }).catch(function (error) {});
     }
   }, {
     key: 'deleteFood',
     value: function deleteFood(event) {
-      var _this6 = this;
+      var _this5 = this;
 
-      console.log(event.target.id);
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       _axios2.default.delete('/api/addfood', {
         data: { _id: event.target.id }
       }).then(function (result) {
-        console.log(result.data);
-        var foodTable = _this6.state.foodTable.filter(function (row) {
+
+        var foodTable = _this5.state.foodTable.filter(function (row) {
           return row.key !== result.data.foodId;
         });
-        _this6.setState({
+        _this5.setState({
           foodTable: foodTable
         });
       });
@@ -48491,11 +48463,12 @@ var Stats = function (_React$Component) {
       var _this2 = this;
 
       document.title = 'Tracker - Stats';
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       _axios2.default.get('/api/stats').then(function (result) {
         if (result.data.message === 'unauthorized') {
           // window.location.href = '/api/auth';
         } else {
-          console.log(result.data);
+
           var datapoints = result.data;
           // datapoints.pop();
           var chartParams = _this2.state.chartParams;
@@ -48507,16 +48480,13 @@ var Stats = function (_React$Component) {
           });
           var backgroundColor = _this2.getColorArray(chartParams.datasets[0].data, 100, 'rgba(255, 96, 96, 0.75)', 'rgba(143, 224, 114, 0.75)');
           var hoverBackgroundColor = _this2.getColorArray(chartParams.datasets[0].data, 100, 'rgba(204, 36, 36, 0.75)', 'rgba(87, 183, 53, 0.75)');
-          console.log(backgroundColor);
-          console.log(chartParams.datasets[0].data);
+
           chartParams.datasets[0].backgroundColor = backgroundColor;
           chartParams.datasets[0].borderColor = backgroundColor;
           chartParams.datasets[0].hoverBackgroundColor = hoverBackgroundColor;
           chartParams.datasets[0].hoverBorderColor = hoverBackgroundColor;
           _this2.setState({
             chartParams: chartParams
-          }, function () {
-            return console.log(_this2.state);
           });
         }
       });
@@ -65135,8 +65105,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import Track from './Track.jsx';
 
 
-_axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-
 var Meals = function (_React$Component) {
   _inherits(Meals, _React$Component);
 
@@ -65174,10 +65142,9 @@ var Meals = function (_React$Component) {
     value: function loadMealsFromServer() {
       var _this2 = this;
 
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       _axios2.default.get('/api/meals').then(function (result) {
-        console.log(result);
         if (result.data.message === 'unauthorized') {
-          console.log('you need to log in');
           // window.location.href = '/api/auth';
         } else {
           _this2.setState({
@@ -65187,8 +65154,6 @@ var Meals = function (_React$Component) {
           _this2.setState({
             data: currentData,
             pageCount: Math.ceil(result.data.length / _this2.state.perPage)
-          }, function () {
-            return console.log(_this2.state);
           });
         }
       });
@@ -65198,14 +65163,12 @@ var Meals = function (_React$Component) {
     value: function handlePageClick(data) {
       var _this3 = this;
 
-      console.log(this.state);
       var selected = data.selected;
       var offset = Math.ceil(selected * this.state.perPage);
 
       this.setState({
         offset: offset
       }, function () {
-        console.log(_this3.state);
         var currentData = _this3.getPaginatedItems(_this3.state.wholeDataset);
         _this3.setState({
           data: currentData
@@ -66061,8 +66024,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-_axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-
 var MealTable = function (_React$Component) {
   _inherits(MealTable, _React$Component);
 
@@ -66130,7 +66091,7 @@ var MealTable = function (_React$Component) {
           )
         );
       });
-      console.log(mealTableRows);
+
       this.setState({
         mealTableRows: mealTableRows
       });
@@ -66140,14 +66101,13 @@ var MealTable = function (_React$Component) {
     value: function deleteMeal(event) {
       var _this3 = this;
 
-      console.log(event.target.id);
+      _axios2.default.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       _axios2.default.delete('/api/meals', {
         data: { _id: event.target.id }
       }).then(function (result) {
-        console.log(result.data.mealId);
-        console.log(_this3.props.data);
+
         var mealTableRows = _this3.state.mealTableRows;
-        console.log(mealTableRows);
+
         mealTableRows = mealTableRows.filter(function (row) {
           return row.key !== result.data.mealId;
         });
@@ -66413,7 +66373,7 @@ var LoginForm = function LoginForm(_ref) {
       user = _ref.user;
   return _react2.default.createElement(
     'div',
-    { className: 'container' },
+    { className: 'column is-half' },
     _react2.default.createElement(
       'form',
       { action: '/', onSubmit: onSubmit },

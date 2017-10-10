@@ -4,8 +4,6 @@ import ReactPaginate from './pagination/PaginationBoxView';
 // import Track from './Track.jsx';
 import MealTable from './MealTable.jsx';
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token'); 
-
 export default class Meals extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +28,7 @@ export default class Meals extends React.Component {
   }
 
   loadMealsFromServer() {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
     axios.get('/api/meals').then((result) => {
       if (result.data.message === 'unauthorized') {
         // window.location.href = '/api/auth';

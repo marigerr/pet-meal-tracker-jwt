@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');    
-
-
 export default class Addfood extends React.Component {
   constructor(props) {
     super(props);
@@ -42,6 +39,7 @@ export default class Addfood extends React.Component {
   }
 
   componentDidMount() {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
     axios.get('/api/track').then((result) => {
       if (result.data.message === 'unauthorized') {
         // console.log('you need to log in');
@@ -61,6 +59,7 @@ export default class Addfood extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
     axios.post('/api/addfood', {
       brand: this.state.brand,
       volume: this.state.volume,
@@ -77,7 +76,7 @@ export default class Addfood extends React.Component {
   }
 
   deleteFood(event) {
-    
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
     axios.delete('/api/addfood', {
       data: { _id: event.target.id },
     }).then((result) => {

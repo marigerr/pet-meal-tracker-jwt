@@ -10,7 +10,7 @@ const LoginForm = ({
   successMessage,
   user
 }) => (
-    <div className="container">
+    <div className="column is-half">
       <form action="/" onSubmit={onSubmit}>
         <h2 className="title">Login</h2>
 
@@ -29,7 +29,7 @@ const LoginForm = ({
           <div className="control">
             <input type="text" name="password" value={user.password} className="input" onChange={onChange} />
           </div>
-        </div>        
+        </div>
 
         <input type="submit" value="Log in" className="button is-success" />
 
