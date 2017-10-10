@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
+import '../images/pawprintWhite24.png';
 
 class NavContainer extends React.Component {
   constructor(props) {
@@ -43,7 +44,10 @@ class NavContainer extends React.Component {
         <div>
           <nav role="navigation" aria-label="main navigation" className="navbar is-success">
             <div className="navbar-brand">
-            <button className={this.state.navbarBurgerClassNames} onClick={this.openNavbarMenu.bind(this)}>
+              <Link to="/" className="navbar-item">
+                <img src="../images/pawprintWhite24.png" alt="Pet Meal Tracker" id="pawprint-logo"></img> Pet Meal Tracker
+              </Link>
+              <button className={this.state.navbarBurgerClassNames} onClick={this.openNavbarMenu.bind(this)}>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -51,7 +55,6 @@ class NavContainer extends React.Component {
             </div>
             <div className={this.state.navbarMenuClassNames} onClick={this.closeNavBar.bind(this)}>
               <div className="navbar-start">
-                <Link to="/" className="navbar-item">Pet Meal Tracker</Link>
                 <Link to="/track" className="navbar-item">Track</Link>
                 <Link to="/meals" className="navbar-item">Meals</Link>
                 <Link to="/stats" className="navbar-item">Stats</Link>

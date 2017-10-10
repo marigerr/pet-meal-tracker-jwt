@@ -2,13 +2,14 @@ const path = require('path');
 
 
 module.exports = {
+  context: path.join(__dirname, 'client/src'),
   // the entry file for the bundle
-  entry: path.join(__dirname, '/client/src/app.jsx'),
+  entry: ('./app.jsx'),
 
   // the bundle file we will get in the result
   output: {
-    path: path.join(__dirname, '/client/dist/js'),
-    filename: 'app.js',
+    path: path.join(__dirname, '/client/dist'),
+    filename: 'bundle.js',
   },
   devtool: 'source-map',
   // devServer: {
@@ -33,6 +34,17 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: [
+          /\.(png|svg|jpg|gif)$/,
+        ],
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]'
+          }
+        }]
+      }      
     ],
   },
 

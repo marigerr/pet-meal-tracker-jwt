@@ -12,7 +12,7 @@ const app = express();
 // tell the app to look for static files in these directories
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'server/static')));
-app.use(express.static(path.join(__dirname, 'client/dist/js')));
+app.use(express.static(path.join(__dirname, 'client/dist')));
 // app.use(express.static('./client/'));
 // tell the app to parse HTTP body messages
 app.use(bodyParser.json());
