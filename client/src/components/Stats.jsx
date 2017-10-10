@@ -24,7 +24,7 @@ export default class Stats extends React.Component {
       if (result.data.message === 'unauthorized') {
         // window.location.href = '/api/auth';
       } else {
-        console.log(result.data);
+        
         const datapoints = result.data;
         // datapoints.pop();
         const chartParams = this.state.chartParams;
@@ -32,15 +32,15 @@ export default class Stats extends React.Component {
         chartParams.labels = result.data.map(day => day._id);
         const backgroundColor = this.getColorArray(chartParams.datasets[0].data, 100, 'rgba(255, 96, 96, 0.75)', 'rgba(143, 224, 114, 0.75)');
         const hoverBackgroundColor = this.getColorArray(chartParams.datasets[0].data, 100, 'rgba(204, 36, 36, 0.75)', 'rgba(87, 183, 53, 0.75)');
-        console.log(backgroundColor);
-        console.log(chartParams.datasets[0].data);
+        
+        
         chartParams.datasets[0].backgroundColor = backgroundColor;
         chartParams.datasets[0].borderColor = backgroundColor;
         chartParams.datasets[0].hoverBackgroundColor = hoverBackgroundColor;
         chartParams.datasets[0].hoverBorderColor = hoverBackgroundColor;
         this.setState({
           chartParams,
-        }, () => console.log(this.state));
+        });
       }
     });
   }

@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');    
 
 export default class Track extends React.Component {
   constructor(props) {
@@ -24,18 +23,20 @@ export default class Track extends React.Component {
       // messageSuccess: 'has-text-success',
       // messageError: 'has-text-warning',
     };
-    console.log(this.state);
+    
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
+    console.log(localStorage.getItem('token'));
     document.title = 'Tracker - track';
-    axios.get('/api/track').then((result) => {
-      console.log(result.data);
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+      axios.get('/api/track').then((result) => {
+      
       if (result.data.message === 'unauthorized') {
-        console.log('you need to log in');
+        
         // window.location.href = '/api/auth';
       } else {
         this.setState({
@@ -50,33 +51,24 @@ export default class Track extends React.Component {
     });
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState(nextProps);
-  //   console.log(this.state);
-  // }
 
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    console.log(event.target.name);
-    console.log(event.target.value);
-    console.log(event.target);
+    const name = target.name; 
     this.setState({
       [name]: value,
       // id: value,
-    }, () => console.log(this.state));
+    })
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const timezoneOffset = new Date().getTimezoneOffset() / 60;
     const timestampLocalDateTime = new Date(this.state.timestamp);
-
-    console.log(this.state.foodtypes);
     const foodtypesArr = this.state.foodtypes;
     const selectedFoodtype = foodtypesArr.find(food => food._id === this.state.brandId);
-    console.log(selectedFoodtype);
+    
     axios.post('/api/track', {
       brand: selectedFoodtype.brand,
       amount: this.state.amount,
@@ -85,7 +77,6 @@ export default class Track extends React.Component {
       timestamp: timestampLocalDateTime,
     })
       .then((response) => {
-        console.log(response.data);
         this.setState({
           showMessage: true,
           addedmeal: true,
@@ -96,7 +87,6 @@ export default class Track extends React.Component {
         });
       })
       .catch((error) => {
-        console.log(error);
         this.setState({
           showMessage: true,
           addedmeal: false,

@@ -32,7 +32,7 @@ export default class MealTable extends React.Component {
           <button id={meal._id} className='button is-danger is-small' onClick={this.deleteMeal.bind(this)}>Delete</button>
         </td>
       </tr>);
-    console.log(mealTableRows);
+    
     this.setState({
       mealTableRows,
     });
@@ -40,14 +40,14 @@ export default class MealTable extends React.Component {
 
 
   deleteMeal(event) {
-    console.log(event.target.id);
+    
     axios.delete('/api/meals', {
       data: { _id: event.target.id },
     }).then((result) => {
-      console.log(result.data.mealId);
-      console.log(this.props.data);
+      
+      
       let mealTableRows = this.state.mealTableRows;
-      console.log(mealTableRows);
+      
       mealTableRows = mealTableRows.filter(row => row.key !== result.data.mealId);
       this.setState({
         mealTableRows,

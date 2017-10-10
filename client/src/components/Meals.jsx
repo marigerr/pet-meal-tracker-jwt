@@ -31,9 +31,7 @@ export default class Meals extends React.Component {
 
   loadMealsFromServer() {
     axios.get('/api/meals').then((result) => {
-      console.log(result);
       if (result.data.message === 'unauthorized') {
-        console.log('you need to log in');
         // window.location.href = '/api/auth';
       } else {
         this.setState({
@@ -43,20 +41,18 @@ export default class Meals extends React.Component {
         this.setState({
           data: currentData,
           pageCount: Math.ceil(result.data.length / this.state.perPage),
-        }, () => console.log(this.state));
+        });
       }
     });
   }
 
   handlePageClick(data) {
-    console.log(this.state);
     const selected = data.selected;
     const offset = Math.ceil(selected * this.state.perPage);
 
     this.setState({
       offset,
     }, () => {
-      console.log(this.state);
       const currentData = this.getPaginatedItems(this.state.wholeDataset);
       this.setState({
         data: currentData,

@@ -13,7 +13,6 @@ export default class Addfood extends React.Component {
       packageDailyEquivalent: '',
       foodTable: [],
     };
-    console.log(this.state);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,9 +30,9 @@ export default class Addfood extends React.Component {
         </td>
       </tr>);
     const currentTableBody = this.state.foodTable;
-    console.log(currentTableBody);
+    
     const foodTable = currentTableBody.concat(newRow);
-    console.log(foodTable);
+    
     this.setState({
       foodTable,
       brand: '',
@@ -57,7 +56,7 @@ export default class Addfood extends React.Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    this.setState({ [name]: value }, () => console.log(this.state));
+    this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
@@ -73,16 +72,16 @@ export default class Addfood extends React.Component {
         this.updateTable(newFoodArray);
       })
       .catch((error) => {
-        console.log(error);
+        
       });
   }
 
   deleteFood(event) {
-    console.log(event.target.id);
+    
     axios.delete('/api/addfood', {
       data: { _id: event.target.id },
     }).then((result) => {
-      console.log(result.data);
+      
       const foodTable = this.state.foodTable.filter(row => row.key !== result.data.foodId);
       this.setState({
         foodTable,
