@@ -135,8 +135,6 @@ export default class Track extends React.Component {
       <div>
         {this.state.foodtypesOptions &&
           <div>
-            <section className="section is-dark">
-
               <h2 className='title'>Track</h2>
 
               <form onSubmit={this.handleSubmit} >
@@ -230,7 +228,6 @@ export default class Track extends React.Component {
 
               {this.feedbackMessage()}
 
-            </section>
           </div >
         }
       </div >

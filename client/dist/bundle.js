@@ -47562,216 +47562,212 @@ var Track = function (_React$Component) {
           'div',
           null,
           _react2.default.createElement(
-            'section',
-            { className: 'section is-dark' },
+            'h2',
+            { className: 'title' },
+            'Track'
+          ),
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.handleSubmit },
             _react2.default.createElement(
-              'h2',
-              { className: 'title' },
-              'Track'
-            ),
-            _react2.default.createElement(
-              'form',
-              { onSubmit: this.handleSubmit },
+              'div',
+              { className: 'field is-horizontal' },
               _react2.default.createElement(
                 'div',
-                { className: 'field is-horizontal' },
+                { className: 'field-label is-normal' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'label' },
+                  'Select Food Type'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'field-body' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'field-label is-normal' },
-                  _react2.default.createElement(
-                    'label',
-                    { className: 'label' },
-                    'Select Food Type'
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-body' },
+                  { className: 'field' },
                   _react2.default.createElement(
                     'div',
-                    { className: 'field' },
+                    { className: 'control' },
                     _react2.default.createElement(
                       'div',
-                      { className: 'control' },
+                      { className: 'select' },
                       _react2.default.createElement(
-                        'div',
-                        { className: 'select' },
-                        _react2.default.createElement(
-                          'select',
-                          { name: 'brandId', value: this.state.brandId, onChange: this.handleChange },
-                          this.state.foodtypesOptions
-                        )
+                        'select',
+                        { name: 'brandId', value: this.state.brandId, onChange: this.handleChange },
+                        this.state.foodtypesOptions
                       )
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'field is-horizontal' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-label is-normal' },
-                  _react2.default.createElement(
-                    'label',
-                    { className: 'label' },
-                    'Package Portion'
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-body' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'field' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'control' },
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'select' },
-                        _react2.default.createElement(
-                          'select',
-                          { name: 'amount', value: this.state.amount, onChange: this.handleChange },
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.10' },
-                            '.10'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.20' },
-                            '.20'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.25' },
-                            '.25'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.30' },
-                            '.30'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.40' },
-                            '.40'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.50' },
-                            '.50'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.60' },
-                            '.60'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.70' },
-                            '.70'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.75' },
-                            '.75'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.80' },
-                            '.80'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '0.90' },
-                            '.90'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: '1' },
-                            '1'
-                          )
-                        )
-                      )
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'field is-horizontal' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-label is-normal' },
-                  _react2.default.createElement(
-                    'label',
-                    { className: 'label' },
-                    'Time'
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-body' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'field' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'control' },
-                      _react2.default.createElement('input', { type: 'datetime-local', value: this.state.timestamp, name: 'timestamp', onChange: this.handleChange })
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'field is-horizontal' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-label is-normal' },
-                  _react2.default.createElement(
-                    'label',
-                    { className: 'label checkbox is-normal' },
-                    'Opened New Package'
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-body' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'field' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'control' },
-                      _react2.default.createElement('input', { className: 'is-normal', name: 'openednewpackage', type: 'checkbox', value: this.state.openednewpackage, onChange: this.handleChange })
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'field is-horizontal' },
-                _react2.default.createElement('div', { className: 'field-label' }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'field-body' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'field' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'control' },
-                      _react2.default.createElement('input', { className: 'button is-success', type: 'submit', value: 'Submit' })
                     )
                   )
                 )
               )
             ),
-            this.feedbackMessage()
-          )
+            _react2.default.createElement(
+              'div',
+              { className: 'field is-horizontal' },
+              _react2.default.createElement(
+                'div',
+                { className: 'field-label is-normal' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'label' },
+                  'Package Portion'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'field-body' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'field' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'control' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'select' },
+                      _react2.default.createElement(
+                        'select',
+                        { name: 'amount', value: this.state.amount, onChange: this.handleChange },
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.10' },
+                          '.10'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.20' },
+                          '.20'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.25' },
+                          '.25'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.30' },
+                          '.30'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.40' },
+                          '.40'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.50' },
+                          '.50'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.60' },
+                          '.60'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.70' },
+                          '.70'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.75' },
+                          '.75'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.80' },
+                          '.80'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '0.90' },
+                          '.90'
+                        ),
+                        _react2.default.createElement(
+                          'option',
+                          { value: '1' },
+                          '1'
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field is-horizontal' },
+              _react2.default.createElement(
+                'div',
+                { className: 'field-label is-normal' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'label' },
+                  'Time'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'field-body' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'field' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'control' },
+                    _react2.default.createElement('input', { type: 'datetime-local', value: this.state.timestamp, name: 'timestamp', onChange: this.handleChange })
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field is-horizontal' },
+              _react2.default.createElement(
+                'div',
+                { className: 'field-label is-normal' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'label checkbox is-normal' },
+                  'Opened New Package'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'field-body' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'field' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'control' },
+                    _react2.default.createElement('input', { className: 'is-normal', name: 'openednewpackage', type: 'checkbox', value: this.state.openednewpackage, onChange: this.handleChange })
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field is-horizontal' },
+              _react2.default.createElement('div', { className: 'field-label' }),
+              _react2.default.createElement(
+                'div',
+                { className: 'field-body' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'field' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'control' },
+                    _react2.default.createElement('input', { className: 'button is-success', type: 'submit', value: 'Submit' })
+                  )
+                )
+              )
+            )
+          ),
+          this.feedbackMessage()
         )
       );
     }
