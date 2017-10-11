@@ -1,21 +1,29 @@
 import React from 'react';
 import axios from 'axios';
-import ReactPaginate from './pagination/PaginationBoxView';
-// import Track from './Track.jsx';
-import MealTable from './MealTable.jsx';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css'
 
 export default class Meals extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mealList: '',
-      modalClassNames: 'modal',
-      editName: '',
-      editAmount: '',
-      editId: '',
       data: [],
-      offset: 0,
-      perPage: 8,
+      columns: [
+        { Header: 'Brand',
+          accessor: 'brand'
+        },
+        { Header: 'Package Portion',
+          accessor: 'packageportion'
+        },
+        { Header: 'Percent Daily Value',
+          accessor: 'percentDailyValue'
+        },
+        { Header: 'Time',
+          accessor: 'timestamp',
+          Cell: cell => new Date(cell.value).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })
+        },         
+      ],
+      defaultPageSize: 10,
     };
   }
   componentDidMount() {
@@ -23,69 +31,27 @@ export default class Meals extends React.Component {
     this.loadMealsFromServer();
   }
 
-  getPaginatedItems(items) {
-    return items.slice(this.state.offset, this.state.offset + this.state.perPage);
-  }
-
   loadMealsFromServer() {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
     axios.get('/api/meals').then((result) => {
       if (result.data.message === 'unauthorized') {
-        // window.location.href = '/api/auth';
+        // error handling
       } else {
         this.setState({
-          wholeDataset: result.data,
-        });
-        const currentData = this.getPaginatedItems(result.data);
-        this.setState({
-          data: currentData,
-          pageCount: Math.ceil(result.data.length / this.state.perPage),
-        });
+          data: result.data,
+        })
       }
-    });
-  }
-
-  handlePageClick(data) {
-    const selected = data.selected;
-    const offset = Math.ceil(selected * this.state.perPage);
-
-    this.setState({
-      offset,
-    }, () => {
-      const currentData = this.getPaginatedItems(this.state.wholeDataset);
-      this.setState({
-        data: currentData,
-      });
     });
   }
 
   render() {
     return (
       <div>
-
-        {this.state.data &&
-          <div>
-            <h2 className='title'>Meals</h2>
-            <MealTable data={this.state.data} />
-            <nav className="pagination" role="navigation" aria-label="pagination">
-              <ReactPaginate previousLabel={'previous'}
-                nextLabel={'next'}
-                breakLabel={<a href="">...</a>}
-                breakClassName={'break-me'}
-                pageCount={this.state.pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={this.handlePageClick.bind(this)}
-                containerClassName={'pagination-list'}
-                subContainerClassName={'pages pagination'}
-                activeClassName={'is-current'}
-                previousClassName={'pagination-previous'}
-                nextClassName={'pagination-next'}
-                pageLinkClassName={'pagination-link'}
-              />
-            </nav>
-          </div>
-        }
+        <ReactTable className="-striped"
+          data={this.state.data}
+          columns={this.state.columns}
+          defaultPageSize= {this.state.defaultPageSize}
+        />
       </div>
     );
   }

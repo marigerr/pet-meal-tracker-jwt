@@ -1,6 +1,5 @@
 const path = require('path');
 
-
 module.exports = {
   context: path.join(__dirname, 'client/src'),
   // the entry file for the bundle
@@ -11,7 +10,7 @@ module.exports = {
     path: path.join(__dirname, '/client/dist'),
     filename: 'bundle.js',
   },
-  devtool: 'source-map',
+
   // devServer: {
   //   contentBase: path.resolve(__dirname, '/client/dist/js'),
   //   watchOptions: { poll: true },
@@ -35,6 +34,13 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      },      
+      {
         test: [
           /\.(png|svg|jpg|gif)$/,
         ],
@@ -47,7 +53,4 @@ module.exports = {
       }      
     ],
   },
-
-  // start Webpack in a watch mode, so Webpack will rebuild the bundle on changes
-  watch: true
 };

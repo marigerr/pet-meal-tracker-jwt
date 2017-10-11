@@ -14,7 +14,6 @@ export default class Account extends React.Component {
     document.title = 'Tracker - Stats';
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
     axios.get('/api/account').then((result) => {
-      console.log(result.data);
       this.setState({
         username: result.data.username,
         user_email: result.data.user_email

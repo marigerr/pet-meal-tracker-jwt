@@ -42,8 +42,7 @@ export default class Addfood extends React.Component {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
     axios.get('/api/track').then((result) => {
       if (result.data.message === 'unauthorized') {
-        // console.log('you need to log in');
-        // window.location.href = '/api/auth';
+        //error handling
       } else if(result.data) {
         this.updateTable(result.data);
       }

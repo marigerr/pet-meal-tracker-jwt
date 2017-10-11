@@ -1,17 +1,17 @@
 ToDo
 -------------------------------------
 add edit function to account
-fix pagination delete item error
 fix colors / design
 add google login
 add facebook login
-prune unnessecary pagination code
-remove legacy unsupported dependency react-addons-create-fragment
 configure prettier with eslint- https://hackernoon.com/configure-eslint-prettier-and-flow-in-vs-code-for-react-development-c9d95db07213
 
 
 Done
 --------------------------------------
+add webpack prod, dev config with minification, remove source map
+changed from react-pagination to react-table which has pagination built in
+hide table and chart until after data is back - changed to react-table instead
 add account page
 fix pagination active class - done : added files locally
 drop database on mlab - created new database instead
