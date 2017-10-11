@@ -1,6 +1,11 @@
 ToDo
 -------------------------------------
+code split
+make pwa
+optimize with google chrome audit check
 add edit function to account
+add edit/delete function to tables
+switch to Pure or other small css library
 fix colors / design
 add google login
 add facebook login
