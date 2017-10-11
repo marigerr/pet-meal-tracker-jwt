@@ -1,0 +1,16 @@
+{
+  "name": "Pet Meal Tracker",
+  "short_name": "Pet Meals",
+  "lang": "en-US",
+  "start_url": "/",
+  "background_color": "#23d160",
+  "theme_color": "#23d160",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "pawprintWhite128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
+}
