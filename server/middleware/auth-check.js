@@ -7,7 +7,6 @@ const logger = require('tracer').console();
  *  The Auth Checker middleware function.
  */
 module.exports = (req, res, next) => {
-  // logger.log(req.headers.authorization);
   if (!req.headers.authorization) {
     return res.status(401).end();
   }

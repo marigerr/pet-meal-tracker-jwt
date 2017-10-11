@@ -11,14 +11,11 @@ exports.getMeals = (req, res) => {
     .sort({ timestamp: 'desc' })
     .exec((error, meals) => {
       // res.render('stats', { isAuthenticated: true, title: 'Tracker-Stats', meals });
-      logger.log(meals);
       res.json(meals);
     });
 };
 
 exports.deleteMeal = (req, res) => {
-  logger.log(req.body);
-
   Meal.findByIdAndRemove(req.body._id, (err, meal) => {
     if (err) {
       logger.log(err);

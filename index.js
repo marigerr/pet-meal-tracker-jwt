@@ -3,7 +3,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const helmet = require('helmet')
+const helmet = require('helmet');
+const compression = require('compression')
 
 // connect to the database and load models
 require('./server/models').connect(process.env.DATABASE);
@@ -11,6 +12,7 @@ require('./server/models').connect(process.env.DATABASE);
 const app = express();
 // tell the app to look for static files in these directories
 app.use(helmet());
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'server/static')));
 app.use(express.static(path.join(__dirname, 'client/dist')));
 // app.use(express.static('./client/'));
@@ -29,6 +31,13 @@ passport.use('local-login', localLoginStrategy);
 // pass the authorization checker middleware
 const authCheckMiddleware = require('./server/middleware/auth-check');
 app.use('/api', authCheckMiddleware);
+
+// app.get('*.js', function (req, res, next) {
+//   req.url = req.url + '.gz';
+//   res.set('Content-Encoding', 'gzip');
+//   res.set('Content-Type', 'text/javascript');
+//   next();
+// });
 
 // routes
 const authRoutes = require('./server/routes/auth');
