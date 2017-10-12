@@ -7,5 +7,13 @@ module.exports = merge(common, {
   watchOptions: {
     aggregateTimeout: 10,
     poll: true
-  }
+  },
+  plugins: [
+    function () {
+      this.plugin('watch-run', function (watching, callback) {
+        console.log('Began compile at ' + new Date());
+        callback();
+      })
+    }
+  ]
 });

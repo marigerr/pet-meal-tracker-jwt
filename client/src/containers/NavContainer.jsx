@@ -18,13 +18,9 @@ class NavContainer extends React.Component {
 
   componentDidMount() {
     if (Auth.isUserAuthenticated()) {
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-      axios.get('/api/dashboard').then((result) => {
-        if (result.status === 200) {
-          this.setState({
-            username: result.data.username
-          });
-        }
+      const username = Auth.getUsername();
+      this.setState({
+        username
       });
     }
   }

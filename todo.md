@@ -1,5 +1,7 @@
 ToDo
 -------------------------------------
+- use different restarting node dev server - or troubleshoot problems with nodemon
+- add unit-testing
 - add dashboard page content
 - add edit function to account
 - add edit/delete function to tables
@@ -21,6 +23,7 @@ In progress
 Done
 --------------------------------------
 
+- store username in local storage after login to avoid needing to request for navbar
 - corrected input email and password type, autofocus input, turned off autocaptilize 
 - finish manifest json : icons sizes
 - add webpack prod, dev config with minification, remove source map

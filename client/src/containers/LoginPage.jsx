@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 import LoginForm from '../components/LoginForm.jsx';
+import axios from 'axios';
+
 
 
 class LoginPage extends React.Component {
@@ -48,39 +50,24 @@ class LoginPage extends React.Component {
     const password = encodeURIComponent(this.state.user.password);
     const formData = `email=${email}&password=${password}`;
 
-    // create an AJAX request
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/login');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      if (xhr.status === 200) {
-        // success
-
-        // change the component-container state
+    axios.post('/auth/login', formData).then((result) => {
+      if (result.status === 200) {
         this.setState({
           errors: {}
         });
-
         // save the token
-        Auth.authenticateUser(xhr.response.token);
-
+        Auth.authenticateUser(result.data.token, result.data.user.name);
 
         // change the current URL to /
         this.context.router.replace('/');
       } else {
-        // failure
-
-        // change the component state
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
-
+        const errors = result.errors ? result.errors : {};
+        errors.summary = result.message;
         this.setState({
           errors
         });
       }
     });
-    xhr.send(formData);
   }
 
   /**
