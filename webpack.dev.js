@@ -5,7 +5,7 @@ module.exports = merge(common, {
   devtool: 'source-map',
   watch: true,
   watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
+    aggregateTimeout: 10,
+    poll: true
   }
 });

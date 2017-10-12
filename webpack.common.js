@@ -10,7 +10,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['client/dist']),
   ],
 
   module: {
@@ -37,7 +37,7 @@ module.exports = {
       },
       {
         test: [
-          /\.(png|svg|jpg|gif)$/,
+          /\.(png|svg|ico|jpg|gif)$/,
           path.join(__dirname, '/client/src/manifest.json'),
           path.join(__dirname, '/client/src/service-worker.js'),
         ],
