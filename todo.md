@@ -1,5 +1,8 @@
 ToDo
 -------------------------------------
+mask password entry
+add dashboard content
+server side rendering
 code split
 add indexdb offline data storage
 optimize with google chrome lighthouse audit check
@@ -13,14 +16,13 @@ configure prettier with eslint- https://hackernoon.com/configure-eslint-prettier
 
 In progress
 --------------------------------------
-finish manifest json : icons sizes
 theme color problem
 check splash screen
-icons
 
 Done
 --------------------------------------
 
+finish manifest json : icons sizes
 add webpack prod, dev config with minification, remove source map
 changed from react-pagination to react-table which has pagination built in
 hide table and chart until after data is back - changed to react-table instead
