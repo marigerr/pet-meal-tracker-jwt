@@ -20,14 +20,14 @@ const LoginForm = ({
         <div className="field">
           <label id="email" className="label">Email</label>
           <div className="control">
-            <input type="text" name="email" value={user.email} className="input" onChange={onChange} />
+            <input autoFocus type="email" autoCorrect="off" autoCapitalize="none" name="email" value={user.email} className="input" onChange={onChange} />
           </div>
         </div>
 
         <div className="field">
           <label id="password" className="label">Password</label>
           <div className="control">
-            <input type="text" name="password" value={user.password} className="input" onChange={onChange} />
+            <input type="password" name="password" value={user.password} className="input" onChange={onChange} />
           </div>
         </div>
 

@@ -18,14 +18,14 @@ const SignUpForm = ({
         <div className="field">
           <label id="name" className="label">Name</label>
           <div className="control">
-            <input type="text" name="name" value={user.name} className="input" onChange={onChange} />
+            <input autoFocus type="text" name="name" value={user.name} className="input" onChange={onChange} />
           </div>
         </div>
 
         <div className="field">
           <label id="email" className="label">Email</label>
           <div className="control">
-            <input type="text" name="email" value={user.email} className="input" onChange={onChange} />
+            <input type="email" name="email"  autoCorrect="off" autoCapitalize="none" value={user.email} className="input" onChange={onChange} />
           </div>
         </div>
 
