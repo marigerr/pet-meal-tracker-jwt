@@ -1,13 +1,17 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, 'client/src'),
-  entry: ('./app.jsx'),
+  entry: ('./app.js'),
 
   output: {
     path: path.join(__dirname, '/client/dist'),
     filename: 'bundle.js',
   },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+  ],
 
   module: {
     rules: [
@@ -30,11 +34,12 @@ module.exports = {
           'style-loader',
           'css-loader',
         ],
-      },      
+      },
       {
         test: [
           /\.(png|svg|jpg|gif)$/,
           path.join(__dirname, '/client/src/manifest.json'),
+          path.join(__dirname, '/client/src/service-worker.js'),
         ],
         use: [{
           loader: 'file-loader',
@@ -42,7 +47,7 @@ module.exports = {
             name: '[path][name].[ext]'
           }
         }]
-      }      
+      }
     ],
   },
 };
