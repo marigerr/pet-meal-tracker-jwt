@@ -1,5 +1,6 @@
 ToDo
 -------------------------------------
+- hide stats until have data
 - use different restarting node dev server - or troubleshoot problems with nodemon
 - add unit-testing
 - add dashboard page content
