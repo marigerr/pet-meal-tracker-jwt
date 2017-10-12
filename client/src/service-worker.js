@@ -7,7 +7,7 @@ const urlsToCache = [
 ];
 
 self.addEventListener('activate', function (event) {
-  console.log(event);
+  //console.log(event);
 });
 
 self.addEventListener('fetch', function (event) {
@@ -24,11 +24,11 @@ self.addEventListener('fetch', function (event) {
 });
 
 self.addEventListener('install', function (event) {
-  console.log(event);
+  //console.log(event);
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function (cache) {
-        console.log('Opened cache');
+        //console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
