@@ -1,13 +1,12 @@
 ToDo
 -------------------------------------
-- mask password entry
-- add dashboard content
+- add dashboard page content
+- add edit function to account
+- add edit/delete function to tables
 - server side rendering
 - code split
 - add indexdb offline data storage
 - optimize with google chrome lighthouse audit - check
-- add edit function to account
-- add edit/delete function to tables
 - switch to Pure or other small css library
 - fix colors / design
 - add google login
@@ -22,6 +21,7 @@ In progress
 Done
 --------------------------------------
 
+- corrected input email and password type, autofocus input, turned off autocaptilize 
 - finish manifest json : icons sizes
 - add webpack prod, dev config with minification, remove source map
 - changed from react-pagination to react-table which has pagination built in
