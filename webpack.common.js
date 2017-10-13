@@ -18,7 +18,14 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, '/client/src'),
-        use: 'babel-loader'
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [ 'env', 'react'],
+            cacheDirectory: true
+          }
+        }
       },
       {
         test: /\.scss$/,
