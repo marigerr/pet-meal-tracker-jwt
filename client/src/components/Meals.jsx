@@ -10,17 +10,23 @@ export default class Meals extends React.Component {
       data: [],
       columns: [
         { Header: 'Brand',
-          accessor: 'brand'
+          accessor: 'brand',
+          maxWidth: 100
         },
-        { Header: 'Package Portion',
-          accessor: 'packageportion'
+        { Header: '% Pkg',
+          accessor: 'packageportion',
+          Cell: cell => Math.round( cell.value * 100 ),
+          maxWidth: 55
         },
-        { Header: 'Percent Daily Value',
-          accessor: 'percentDailyValue'
+        { Header: '% DV',
+          accessor: 'percentDailyValue',
+          Cell: cell => Math.round( cell.value * 100 ),
+          maxWidth: 55
         },
         { Header: 'Time',
           accessor: 'timestamp',
-          Cell: cell => new Date(cell.value).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })
+          Cell: cell => new Date(cell.value).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }),
+          maxWidth: 150
         },         
       ],
       defaultPageSize: 10,
@@ -46,8 +52,9 @@ export default class Meals extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="column is-half">
         <ReactTable className="-striped"
+          noDataText="No Meals Tracked Yet"
           data={this.state.data}
           columns={this.state.columns}
           defaultPageSize= {this.state.defaultPageSize}

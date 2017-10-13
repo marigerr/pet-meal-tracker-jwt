@@ -5,8 +5,8 @@ module.exports = merge(common, {
   devtool: 'source-map',
   watch: true,
   watchOptions: {
-    aggregateTimeout: 10,
-    poll: true
+    aggregateTimeout: 300,
+    poll: 1000
   },
   plugins: [
     function () {

@@ -38,8 +38,13 @@ input[type="checkbox"] {
 }
 
 /* meals table */
-.pagination a {
-  outline: none;
+// .pagination a {
+//   outline: none;
+// }
+@media (max-width: 700px), screen and (orientation: portrait) {
+  .ReactTable {
+    font-size: .75rem;
+  }
 }
 
 #pawprint-logo {

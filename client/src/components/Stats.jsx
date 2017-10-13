@@ -10,7 +10,7 @@ export default class Stats extends React.Component {
       chartParams: {
         datasets: [
           {
-            label: 'Daily Percent Required Calories Eaten',
+            label: '% of Required Calories Eaten',
             borderWidth: 1,
           },
         ],
@@ -29,7 +29,7 @@ export default class Stats extends React.Component {
         const datapoints = result.data;
         // datapoints.pop();
         const chartParams = this.state.chartParams;
-        chartParams.datasets[0].data = result.data.map(day => day.percentDailyValue * 100);
+        chartParams.datasets[0].data = result.data.map(day => Math.round(day.percentDailyValue * 100));
         chartParams.labels = result.data.map(day => day._id);
         const backgroundColor = this.getColorArray(chartParams.datasets[0].data, 100, 'rgba(255, 96, 96, 0.75)', 'rgba(143, 224, 114, 0.75)');
         const hoverBackgroundColor = this.getColorArray(chartParams.datasets[0].data, 100, 'rgba(204, 36, 36, 0.75)', 'rgba(87, 183, 53, 0.75)');
@@ -62,7 +62,7 @@ export default class Stats extends React.Component {
   render() {
     return (
       <div>
-        {this.state.chartParams &&
+        {this.state.chartParams.labels &&
           <div>
             <h1 className='title'>Meal Stats</h1>
             <Bar
