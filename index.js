@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const app = express();
+require('./server/models').connect(process.env.DATABASE);
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -7,12 +9,10 @@ const helmet = require('helmet');
 const compression = require('compression')
 const localSignupStrategy = require('./server/passport/local-signup');
 const localLoginStrategy = require('./server/passport/local-login');
-const app = express();
 const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 const defaultRoute = require('./server/routes/defaultRoute');
 
-require('./server/models').connect(process.env.DATABASE);
 
 app.use(helmet());
 app.use(compression());
