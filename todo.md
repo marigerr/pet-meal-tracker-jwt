@@ -1,6 +1,5 @@
 ToDo
 -------------------------------------
-- hide stats until have data
 - use different restarting node dev server - or troubleshoot problems with nodemon.   try out chokidar
 https://medium.com/@kevinsimper/dont-use-nodemon-there-are-better-ways-fc016b50b45e
 - add error handling
@@ -12,7 +11,8 @@ https://medium.com/@kevinsimper/dont-use-nodemon-there-are-better-ways-fc016b50b
 - code split
 - add indexdb offline data storage
 - optimize with google chrome lighthouse audit - check
-- switch to Pure or other small css library
+- switch to Pure or other small css library - or just do my own
+- fix date problem
 - fix colors / design
 - add google login
 - add facebook login
@@ -26,6 +26,7 @@ In progress
 Done
 --------------------------------------
 
+- hide stats until have data
 - store username in local storage after login to avoid needing to request for navbar
 - corrected input email and password type, autofocus input, turned off autocaptilize 
 - finish manifest json : icons sizes
