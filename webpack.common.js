@@ -22,8 +22,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [ 'env', 'react'],
-            cacheDirectory: true
+            presets: ['env', "react"],
+            cacheDirectory: true,
           }
         }
       },
