@@ -1,7 +1,9 @@
 ToDo
 -------------------------------------
 - hide stats until have data
-- use different restarting node dev server - or troubleshoot problems with nodemon
+- use different restarting node dev server - or troubleshoot problems with nodemon.   try out chokidar
+https://medium.com/@kevinsimper/dont-use-nodemon-there-are-better-ways-fc016b50b45e
+- add error handling
 - add unit-testing
 - add dashboard page content
 - add edit function to account

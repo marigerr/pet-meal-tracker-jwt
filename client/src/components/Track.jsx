@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 
 export default class Track extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     const currentUTCDate = new Date();
     currentUTCDate.setHours(currentUTCDate.getHours() - (currentUTCDate.getTimezoneOffset() / 60));
     const localDateTime = currentUTCDate.toISOString().slice(0, -8);
@@ -34,8 +35,12 @@ export default class Track extends React.Component {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
     axios.get('/api/track').then((result) => {
 
-      if (result.data.message === 'unauthorized') {
+      if (result.status !== 200) {
+        // handle server errors
+      } else if (result.data.length === 0) {
+        this.context.router.replace('/addfood');
       } else {
+        console.log(result.data)
         this.setState({
           foodtypes: result.data,
         });
@@ -47,7 +52,6 @@ export default class Track extends React.Component {
       }
     });
   }
-
 
   handleChange(event) {
     const target = event.target;
@@ -135,98 +139,98 @@ export default class Track extends React.Component {
       <div>
         {this.state.foodtypesOptions &&
           <div>
-              <h2 className='title'>Track</h2>
+            <h2 className='title'>Track</h2>
 
-              <form onSubmit={this.handleSubmit} >
-                {/* <input type="text" name="id" value={this.state.id} className="input is-hidden" onChange={this.handleChange} />
+            <form onSubmit={this.handleSubmit} >
+              {/* <input type="text" name="id" value={this.state.id} className="input is-hidden" onChange={this.handleChange} />
               <input type="text" name="packageDailyEquivalent" value={this.state.packageDailyEquivalent} className="input is-hidden" onChange={this.handleChange} /> */}
-                <div className="field is-horizontal">
-                  <div className="field-label is-normal">
-                    <label className="label">Select Food Type</label>
-                  </div>
-                  <div className="field-body">
-                    <div className="field">
-                      <div className="control">
-                        <div className="select">
-                          <select name="brandId" value={this.state.brandId} onChange={this.handleChange}>
-                            {this.state.foodtypesOptions}
-                          </select>
-                        </div>
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label">Select Food Type</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <div className="select">
+                        <select name="brandId" value={this.state.brandId} onChange={this.handleChange}>
+                          {this.state.foodtypesOptions}
+                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="field is-horizontal">
-                  <div className="field-label is-normal">
-                    <label className="label">Package Portion</label>
-                  </div>
-                  <div className="field-body">
-                    <div className="field">
-                      <div className="control">
-                        <div className="select">
-                          <select name="amount" value={this.state.amount} onChange={this.handleChange}>
-                            <option value="0.10">.10</option>
-                            <option value="0.20">.20</option>
-                            <option value="0.25">.25</option>
-                            <option value="0.30">.30</option>
-                            <option value="0.40">.40</option>
-                            <option value="0.50">.50</option>
-                            <option value="0.60">.60</option>
-                            <option value="0.70">.70</option>
-                            <option value="0.75">.75</option>
-                            <option value="0.80">.80</option>
-                            <option value="0.90">.90</option>
-                            <option value="1">1</option>
-                          </select>
-                        </div>
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label">Package Portion</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <div className="select">
+                        <select name="amount" value={this.state.amount} onChange={this.handleChange}>
+                          <option value="0.10">.10</option>
+                          <option value="0.20">.20</option>
+                          <option value="0.25">.25</option>
+                          <option value="0.30">.30</option>
+                          <option value="0.40">.40</option>
+                          <option value="0.50">.50</option>
+                          <option value="0.60">.60</option>
+                          <option value="0.70">.70</option>
+                          <option value="0.75">.75</option>
+                          <option value="0.80">.80</option>
+                          <option value="0.90">.90</option>
+                          <option value="1">1</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="field is-horizontal">
-                  <div className="field-label is-normal">
-                    <label className="label">Time</label>
-                  </div>
-                  <div className="field-body">
-                    <div className="field">
-                      <div className="control">
-                        <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
-                      </div>
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label">Time</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="field is-horizontal">
-                  <div className="field-label is-normal">
-                    <label className="label checkbox is-normal">Opened New Package</label>
-                  </div>
-                  <div className="field-body">
-                    <div className="field">
-                      <div className="control">
-                        {/* <label className="checkbox is-normal"> */}
-                        <input className="is-normal" name="openednewpackage" type="checkbox" value={this.state.openednewpackage} onChange={this.handleChange} />
-                        {/* </label> */}
-                      </div>
+              <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                  <label className="label checkbox is-normal">Opened New Package</label>
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      {/* <label className="checkbox is-normal"> */}
+                      <input className="is-normal" name="openednewpackage" type="checkbox" value={this.state.openednewpackage} onChange={this.handleChange} />
+                      {/* </label> */}
                     </div>
                   </div>
                 </div>
-                <div className="field is-horizontal">
-                  <div className="field-label">
-                  </div>
-                  <div className="field-body">
-                    <div className="field">
-                      <div className="control">
-                        <input className='button is-success' type="submit" value="Submit" />
-                      </div>
+              </div>
+              <div className="field is-horizontal">
+                <div className="field-label">
+                </div>
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <input className='button is-success' type="submit" value="Submit" />
                     </div>
                   </div>
                 </div>
+              </div>
 
-              </form >
+            </form >
 
-              {this.feedbackMessage()}
+            {this.feedbackMessage()}
 
           </div >
         }
@@ -243,3 +247,7 @@ export default class Track extends React.Component {
 //   // timestamp: new Date().toISOString().slice(0, -1),
 //   timestamp: new Date(new Date().toLocaleString()).toISOString().slice(0, -1),
 // };
+
+Track.contextTypes = {
+  router: PropTypes.object.isRequired
+};
