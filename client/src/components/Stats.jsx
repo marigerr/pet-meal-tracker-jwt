@@ -24,8 +24,8 @@ export default class Stats extends React.Component {
     axios.get('/api/stats').then((result) => {
       if (result.data.message === 'unauthorized') {
         // window.location.href = '/api/auth';
-      } else {
-        
+      } else if (result.data.length !== 0) {
+        console.log(result.data);
         const datapoints = result.data;
         // datapoints.pop();
         const chartParams = this.state.chartParams;

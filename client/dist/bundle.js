@@ -48939,8 +48939,8 @@ var Stats = function (_React$Component) {
       _axios2.default.get('/api/stats').then(function (result) {
         if (result.data.message === 'unauthorized') {
           // window.location.href = '/api/auth';
-        } else {
-
+        } else if (result.data.length !== 0) {
+          console.log(result.data);
           var datapoints = result.data;
           // datapoints.pop();
           var chartParams = _this2.state.chartParams;
