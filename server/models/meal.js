@@ -8,7 +8,9 @@ const MealSchema = new Schema({
   openednewpackage: Boolean,
   packageportion: Number,
   percentDailyValue: Number,
+  timestampDateFormat: Date,
   timestampString: String,
+  timestampFormattedString: String,
   timezoneoffset: Number,
 });
 

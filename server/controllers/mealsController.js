@@ -8,7 +8,7 @@ exports.getMeals = (req, res) => {
   Meal.find({
     userID: user._id,
   })
-    .sort({ timestamp: 'desc' })
+    .sort({ timestampDateFormat: 'desc' })
     .exec((error, meals) => {
       // res.render('stats', { isAuthenticated: true, title: 'Tracker-Stats', meals });
       res.json(meals);

@@ -48282,13 +48282,14 @@ var Track = function (_React$Component) {
         timestampString: timestampString,
         timezoneoffset: this.state.timezoneoffset
       }).then(function (response) {
+        console.log();
         _this3.setState({
           showMessage: true,
           addedmeal: true,
           addedmealBrand: response.data.meal.brand,
           addedmealPortion: response.data.meal.packageportion,
           addedmealPercentDailyValue: response.data.meal.percentDailyValue,
-          addedmealtimestamp: response.data.meal.timestampString
+          addedmealtimestamp: response.data.meal.timestampDateFormat
         });
       }).catch(function (error) {
         console.log(error);
@@ -48302,6 +48303,7 @@ var Track = function (_React$Component) {
     key: 'feedbackMessage',
     value: function feedbackMessage() {
       if (this.state.showMessage) {
+        var time = new Date(this.state.addedmealtimestamp).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
         if (this.state.addedmeal) {
           return _react2.default.createElement(
             'div',
@@ -48339,7 +48341,7 @@ var Track = function (_React$Component) {
                 _react2.default.createElement(
                   'p',
                   null,
-                  new Date(this.state.addedmealtimestamp).toLocaleString()
+                  time
                 )
               )
             )
@@ -65506,7 +65508,7 @@ var Meals = function (_React$Component) {
         }
         // maxWidth: 60
       }, { Header: 'Time',
-        accessor: 'timestampString',
+        accessor: 'timestampDateFormat',
         Cell: function Cell(cell) {
           return new Date(cell.value).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
         }

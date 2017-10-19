@@ -9,13 +9,18 @@ exports.getTrack = (req, res) => {
 exports.postTrack = (req, res) => {
   let user = new User();
   Object.assign(user, res.locals.user);
+  const timestampDateFormat = new Date(req.body.timestampString);
+  timestampDateFormat.setHours(timestampDateFormat.getHours() + req.body.timezoneoffset);
+  const timestampFormattedString = timestampDateFormat.toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })
   const meal = new Meal({
     brand: req.body.brand,
     packageportion: req.body.amount,
     percentDailyValue: req.body.percentDailyValue,
     openednewpackage: req.body.openednewpackage,
     userID: user._id,
+    timestampDateFormat, timestampDateFormat,
     timestampString: req.body.timestampString,
+    timestampFormattedString: timestampFormattedString,
     timezoneoffset: req.body.timezoneoffset,
   });
   meal.save((error) => {

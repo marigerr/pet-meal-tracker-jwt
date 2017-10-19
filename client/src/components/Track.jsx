@@ -84,13 +84,14 @@ export default class Track extends React.Component {
       timezoneoffset: this.state.timezoneoffset,
     })
       .then((response) => {
+        console.log()
         this.setState({
           showMessage: true,
           addedmeal: true,
           addedmealBrand: response.data.meal.brand,
           addedmealPortion: response.data.meal.packageportion,
           addedmealPercentDailyValue: response.data.meal.percentDailyValue,
-          addedmealtimestamp: response.data.meal.timestampString,
+          addedmealtimestamp: response.data.meal.timestampDateFormat,
         });
       })
       .catch((error) => {
@@ -104,6 +105,7 @@ export default class Track extends React.Component {
 
   feedbackMessage() {
     if (this.state.showMessage) {
+      const time = new Date(this.state.addedmealtimestamp).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
       if (this.state.addedmeal) {
         return (
           <div className="column is-half">
@@ -115,7 +117,7 @@ export default class Track extends React.Component {
               <div className="message-body">
                 <p>{this.state.addedmealBrand} : {this.state.addedmealPortion} package  </p>
                 <p>{Math.round(this.state.addedmealPercentDailyValue * 100)}% of daily calories</p>
-                <p>{new Date(this.state.addedmealtimestamp).toLocaleString()}</p>
+                <p>{time}</p>
               </div>
             </article>
           </div>
