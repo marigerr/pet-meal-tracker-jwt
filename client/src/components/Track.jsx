@@ -6,21 +6,28 @@ import axios from 'axios';
 export default class Track extends React.Component {
   constructor(props, context) {
     super(props, context);
+
     const currentUTCDate = new Date();
-    currentUTCDate.setHours(currentUTCDate.getHours() - (currentUTCDate.getTimezoneOffset() / 60));
+    const timezoneoffset = currentUTCDate.getTimezoneOffset() / 60;
+    currentUTCDate.setHours(currentUTCDate.getHours() - timezoneoffset);
     const localDateTime = currentUTCDate.toISOString().slice(0, -8);
 
     this.state = {
+
+      name: '',
+      timestamp: localDateTime,
+      timezoneoffset: timezoneoffset,
+
       id: '',
       brandId: '',
       brand: '',
       amount: '0.25',
       openednewpackage: false,
       percentDailyValue: 0,
-      timestamp: localDateTime,
       foodtypes: [],
       foodtypesOptions: '',
       submittedMessage: false,
+      showMessage: false,
       // messageSuccess: 'has-text-success',
       // messageError: 'has-text-warning',
     };
@@ -40,7 +47,6 @@ export default class Track extends React.Component {
       } else if (result.data.length === 0) {
         this.context.router.replace('/addfood');
       } else {
-        console.log(result.data)
         this.setState({
           foodtypes: result.data,
         });
@@ -65,17 +71,17 @@ export default class Track extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const timezoneOffset = new Date().getTimezoneOffset() / 60;
-    const timestampLocalDateTime = new Date(this.state.timestamp);
+    const timestampString = this.state.timestamp;
     const foodtypesArr = this.state.foodtypes;
     const selectedFoodtype = foodtypesArr.find(food => food._id === this.state.brandId);
-
+    console.log(this.state.timezoneoffset);
     axios.post('/api/track', {
       brand: selectedFoodtype.brand,
       amount: this.state.amount,
       percentDailyValue: this.state.amount * selectedFoodtype.packageDailyEquivalent,
       openednewpackage: this.state.openednewpackage,
-      timestamp: timestampLocalDateTime,
+      timestampString: timestampString,
+      timezoneoffset: this.state.timezoneoffset,
     })
       .then((response) => {
         this.setState({
@@ -84,10 +90,11 @@ export default class Track extends React.Component {
           addedmealBrand: response.data.meal.brand,
           addedmealPortion: response.data.meal.packageportion,
           addedmealPercentDailyValue: response.data.meal.percentDailyValue,
-          addedmealtimestamp: response.data.meal.timestamp,
+          addedmealtimestamp: response.data.meal.timestampString,
         });
       })
       .catch((error) => {
+        console.log(error);
         this.setState({
           showMessage: true,
           addedmeal: false,

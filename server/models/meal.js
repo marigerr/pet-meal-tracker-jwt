@@ -8,7 +8,8 @@ const MealSchema = new Schema({
   openednewpackage: Boolean,
   packageportion: Number,
   percentDailyValue: Number,
-  timestamp: Date,
+  timestampString: String,
+  timezoneoffset: Number,
 });
 
 module.exports = mongoose.model('Meal', MealSchema);

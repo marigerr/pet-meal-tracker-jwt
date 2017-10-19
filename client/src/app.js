@@ -4,7 +4,7 @@ import { browserHistory, Router } from 'react-router';
 import routes from './routes.js';
 import './service-worker.js';
 import registerServiceWorker from './registerServiceWorker';
-import './scss/layout.scss';
+import './styles/layout.scss';
 import './manifest.json';
 import './favicon.png';
 

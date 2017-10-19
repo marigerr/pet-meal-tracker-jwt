@@ -15,7 +15,8 @@ exports.postTrack = (req, res) => {
     percentDailyValue: req.body.percentDailyValue,
     openednewpackage: req.body.openednewpackage,
     userID: user._id,
-    timestamp: req.body.timestamp,
+    timestampString: req.body.timestampString,
+    timezoneoffset: req.body.timezoneoffset,
   });
   meal.save((error) => {
     if (error) {
