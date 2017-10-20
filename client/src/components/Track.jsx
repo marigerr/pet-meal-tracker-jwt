@@ -32,7 +32,6 @@ export default class Track extends React.Component {
       // messageError: 'has-text-warning',
     };
 
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -65,7 +64,6 @@ export default class Track extends React.Component {
     const name = target.name;
     this.setState({
       [name]: value,
-      // id: value,
     })
   }
 
