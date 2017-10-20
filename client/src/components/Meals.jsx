@@ -24,13 +24,10 @@ export default class Meals extends React.Component {
           // maxWidth: 60
         },
         { Header: 'Time',
-          accessor: 'timestampDateFormat',
+          accessor: 'utcTime',
           Cell: cell => new Date(cell.value).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }),
           // maxWidth: 250
-        }, 
-        { Header: 'Time Zone offset',
-          accessor: 'timezoneoffset',
-        },                         
+        },                       
       ],
       defaultPageSize: 10,
     };

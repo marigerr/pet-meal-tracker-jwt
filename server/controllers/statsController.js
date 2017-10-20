@@ -15,7 +15,7 @@ exports.getStats = (req, res) => {
     },
     {
       $project: {
-        dayOfYear: { $substr: ['$timestampDateFormat', 0, 10] },
+        dayOfYear: { $substr: ['$localDateTime', 0, 10] },
         percentDailyValue: true,
       },
     },

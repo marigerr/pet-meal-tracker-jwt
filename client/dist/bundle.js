@@ -48193,15 +48193,15 @@ var Track = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Track.__proto__ || Object.getPrototypeOf(Track)).call(this, props, context));
 
-    var currentUTCDate = new Date();
-    var timezoneoffset = currentUTCDate.getTimezoneOffset() / 60;
-    currentUTCDate.setHours(currentUTCDate.getHours() - timezoneoffset);
-    var localDateTime = currentUTCDate.toISOString().slice(0, -8);
+    var utcDateTime = new Date();
+    var timezoneoffset = utcDateTime.getTimezoneOffset() / 60;
+    var localDateTime = utcDateTime.setHours(utcDateTime.getHours() - timezoneoffset);
+    localDateTime = utcDateTime.toISOString().slice(0, -8);
 
     _this.state = {
 
       name: '',
-      timestamp: localDateTime,
+      localDateTime: localDateTime,
       timezoneoffset: timezoneoffset,
 
       id: '',
@@ -48268,28 +48268,25 @@ var Track = function (_React$Component) {
       var _this3 = this;
 
       event.preventDefault();
-      var timestampString = this.state.timestamp;
       var foodtypesArr = this.state.foodtypes;
       var selectedFoodtype = foodtypesArr.find(function (food) {
         return food._id === _this3.state.brandId;
       });
-      console.log(this.state.timezoneoffset);
       _axios2.default.post('/api/track', {
         brand: selectedFoodtype.brand,
         amount: this.state.amount,
         percentDailyValue: this.state.amount * selectedFoodtype.packageDailyEquivalent,
         openednewpackage: this.state.openednewpackage,
-        timestampString: timestampString,
+        localDateTime: this.state.localDateTime,
         timezoneoffset: this.state.timezoneoffset
       }).then(function (response) {
-        console.log();
         _this3.setState({
           showMessage: true,
           addedmeal: true,
           addedmealBrand: response.data.meal.brand,
           addedmealPortion: response.data.meal.packageportion,
           addedmealPercentDailyValue: response.data.meal.percentDailyValue,
-          addedmealtimestamp: response.data.meal.timestampDateFormat
+          addedmealUtcDateTime: response.data.meal.utcDateTime
         });
       }).catch(function (error) {
         console.log(error);
@@ -48303,7 +48300,7 @@ var Track = function (_React$Component) {
     key: 'feedbackMessage',
     value: function feedbackMessage() {
       if (this.state.showMessage) {
-        var time = new Date(this.state.addedmealtimestamp).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+        var time = new Date(this.state.addedmealUtcDateTime).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
         if (this.state.addedmeal) {
           return _react2.default.createElement(
             'div',
@@ -48368,7 +48365,12 @@ var Track = function (_React$Component) {
     key: 'closeMessage',
     value: function closeMessage() {
       this.setState({
-        showMessage: false
+        showMessage: false,
+        addedmeal: false,
+        addedmealBrand: '',
+        addedmealPortion: '',
+        addedmealPercentDailyValue: '',
+        addedmealUtcDateTime: ''
       });
     }
   }, {
@@ -48536,7 +48538,7 @@ var Track = function (_React$Component) {
                   _react2.default.createElement(
                     'div',
                     { className: 'control' },
-                    _react2.default.createElement('input', { type: 'datetime-local', value: this.state.timestamp, name: 'timestamp', onChange: this.handleChange })
+                    _react2.default.createElement('input', { type: 'datetime-local', value: this.state.localDateTime, name: 'localDateTime', onChange: this.handleChange })
                   )
                 )
               )
@@ -48595,16 +48597,9 @@ var Track = function (_React$Component) {
   return Track;
 }(_react2.default.Component);
 
-// Track.defaultProps = {
-//   name: '',
-//   amount: '0.25',
-//   foodtypes: '',
-//   openednewpackage: false,
-//   // timestamp: new Date().toISOString().slice(0, -1),
-//   timestamp: new Date(new Date().toLocaleString()).toISOString().slice(0, -1),
-// };
-
 exports.default = Track;
+
+
 Track.contextTypes = {
   router: _propTypes2.default.object.isRequired
 };
@@ -48940,7 +48935,6 @@ var Stats = function (_React$Component) {
         if (result.data.message === 'unauthorized') {
           // window.location.href = '/api/auth';
         } else if (result.data.length !== 0) {
-          console.log(result.data);
           var datapoints = result.data;
           // datapoints.pop();
           var chartParams = _this2.state.chartParams;
@@ -65508,13 +65502,11 @@ var Meals = function (_React$Component) {
         }
         // maxWidth: 60
       }, { Header: 'Time',
-        accessor: 'timestampDateFormat',
+        accessor: 'utcTime',
         Cell: function Cell(cell) {
           return new Date(cell.value).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
         }
         // maxWidth: 250
-      }, { Header: 'Time Zone offset',
-        accessor: 'timezoneoffset'
       }],
       defaultPageSize: 10
     };
