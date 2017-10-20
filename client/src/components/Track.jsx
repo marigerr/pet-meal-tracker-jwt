@@ -7,15 +7,15 @@ export default class Track extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    const currentUTCDate = new Date();
-    const timezoneoffset = currentUTCDate.getTimezoneOffset() / 60;
-    currentUTCDate.setHours(currentUTCDate.getHours() - timezoneoffset);
-    const localDateTime = currentUTCDate.toISOString().slice(0, -8);
+    const utcDateTime = new Date();
+    const timezoneoffset = utcDateTime.getTimezoneOffset() / 60;
+    let localDateTime = utcDateTime.setHours(utcDateTime.getHours() - timezoneoffset);
+    localDateTime = utcDateTime.toISOString().slice(0, -8);
 
     this.state = {
 
       name: '',
-      timestamp: localDateTime,
+      localDateTime: localDateTime,
       timezoneoffset: timezoneoffset,
 
       id: '',
@@ -71,27 +71,24 @@ export default class Track extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const timestampString = this.state.timestamp;
     const foodtypesArr = this.state.foodtypes;
     const selectedFoodtype = foodtypesArr.find(food => food._id === this.state.brandId);
-    console.log(this.state.timezoneoffset);
     axios.post('/api/track', {
       brand: selectedFoodtype.brand,
       amount: this.state.amount,
       percentDailyValue: this.state.amount * selectedFoodtype.packageDailyEquivalent,
       openednewpackage: this.state.openednewpackage,
-      timestampString: timestampString,
+      localDateTime: this.state.localDateTime,
       timezoneoffset: this.state.timezoneoffset,
     })
       .then((response) => {
-        console.log()
         this.setState({
           showMessage: true,
           addedmeal: true,
           addedmealBrand: response.data.meal.brand,
           addedmealPortion: response.data.meal.packageportion,
           addedmealPercentDailyValue: response.data.meal.percentDailyValue,
-          addedmealtimestamp: response.data.meal.timestampDateFormat,
+          addedmealUtcDateTime: response.data.meal.utcDateTime,
         });
       })
       .catch((error) => {
@@ -105,7 +102,7 @@ export default class Track extends React.Component {
 
   feedbackMessage() {
     if (this.state.showMessage) {
-      const time = new Date(this.state.addedmealtimestamp).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+      const time = new Date(this.state.addedmealUtcDateTime).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });      
       if (this.state.addedmeal) {
         return (
           <div className="column is-half">
@@ -140,6 +137,11 @@ export default class Track extends React.Component {
   closeMessage() {
     this.setState({
       showMessage: false,
+      addedmeal: false,
+      addedmealBrand: '',
+      addedmealPortion: '',
+      addedmealPercentDailyValue: '',
+      addedmealUtcDateTime: '',      
     });
   }
 
@@ -205,7 +207,7 @@ export default class Track extends React.Component {
                 <div className="field-body">
                   <div className="field">
                     <div className="control">
-                      <input type="datetime-local" value={this.state.timestamp} name="timestamp" onChange={this.handleChange} />
+                      <input type="datetime-local" value={this.state.localDateTime} name="localDateTime" onChange={this.handleChange} />
                     </div>
                   </div>
                 </div>
@@ -247,15 +249,6 @@ export default class Track extends React.Component {
     );
   }
 }
-
-// Track.defaultProps = {
-//   name: '',
-//   amount: '0.25',
-//   foodtypes: '',
-//   openednewpackage: false,
-//   // timestamp: new Date().toISOString().slice(0, -1),
-//   timestamp: new Date(new Date().toLocaleString()).toISOString().slice(0, -1),
-// };
 
 Track.contextTypes = {
   router: PropTypes.object.isRequired
