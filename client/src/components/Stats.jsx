@@ -20,6 +20,10 @@ export default class Stats extends React.Component {
 
   componentDidMount() {
     document.title = 'Tracker - Stats';
+    this.loadStatsFromServer();
+  }
+
+  loadStatsFromServer() {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');        
     axios.get('/api/stats').then((result) => {
       if (result.data.message === 'unauthorized') {
@@ -57,6 +61,9 @@ export default class Stats extends React.Component {
     return colors;
   }
 
+  componentWillReceiveProps() {
+    this.loadStatsFromServer();
+  }
 
   render() {
     return (
