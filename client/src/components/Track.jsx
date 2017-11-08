@@ -88,6 +88,7 @@ export default class Track extends React.Component {
           addedmealPercentDailyValue: response.data.meal.percentDailyValue,
           addedmealUtcDateTime: response.data.meal.utcDateTime,
         });
+        this.props.reRenderSiblings();
       })
       .catch((error) => {
         console.log(error);
@@ -103,7 +104,7 @@ export default class Track extends React.Component {
       const time = new Date(this.state.addedmealUtcDateTime).toLocaleString([], { month: '2-digit', day: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });      
       if (this.state.addedmeal) {
         return (
-          <div className="column is-half">
+          <div className="column">
             <article className="show-message message is-success">
               <div className="message-header">
                 <p>Meal Added!</p>

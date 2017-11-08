@@ -64,7 +64,7 @@ class NavContainer extends React.Component {
             </div>
             <div className={this.state.navbarMenuClassNames} onClick={this.closeNavBar.bind(this)}>
               <div className="navbar-start">
-                <Link to="/track" className="navbar-item">Track</Link>
+                {/* <Link to="/track" className="navbar-item">Track</Link> */}
                 <Link to="/meals" className="navbar-item">Meals</Link>
                 <Link to="/stats" className="navbar-item">Stats</Link>
                 <Link to="/addfood" className="navbar-item">Add Food</Link>
