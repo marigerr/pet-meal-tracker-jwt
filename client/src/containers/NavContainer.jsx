@@ -85,11 +85,8 @@ class NavContainer extends React.Component {
             </div>
           </nav>
         </div>
-        <section className="section">
           { /* child component will be rendered here */}
           {this.props.children}
-        </section>
-
       </div >
     )
   }

@@ -9,7 +9,7 @@ const SignUpForm = ({
   errors,
   user,
 }) => (
-    <div className="container">
+    <div className="column is-half">
       <form action="/" onSubmit={onSubmit}>
         <h2 className="title">Sign Up</h2>
 

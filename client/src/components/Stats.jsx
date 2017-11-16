@@ -67,7 +67,7 @@ export default class Stats extends React.Component {
 
   render() {
     return (
-      <div>
+      <section className='section'>
         {this.state.chartParams.labels &&
           <div>
             <h1 className='title'>Meal Stats</h1>
@@ -90,7 +90,7 @@ export default class Stats extends React.Component {
             />
           </div>
         }
-      </div>
+      </section>
     );
   }
 }

@@ -90,7 +90,7 @@ export default class Addfood extends React.Component {
   render() {
     return (
       <div className="columns">
-        <div className="column is-half">
+        <section className="section column is-half">
           <h1 className="title">Add New Food </h1>
           <form onSubmit={this.handleSubmit}>
             <div className="field">
@@ -113,10 +113,10 @@ export default class Addfood extends React.Component {
             </div>
             <input type="submit" value="Submit" className="button is-success" />
           </form>
-        </div>
+        </section>
 
         {this.state.foodTable &&
-          <div className="column is-half">
+          <section className="section column is-half">
             <h1 id="addFoodTableTitle" className='title'>Entered Food</h1>
             <table className="table is-striped">
               <thead>
@@ -129,7 +129,7 @@ export default class Addfood extends React.Component {
               </thead>
               <tbody>{this.state.foodTable}</tbody>
             </table>
-          </div>
+          </section>
         }
       </div>
     );

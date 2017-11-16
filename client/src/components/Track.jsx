@@ -146,7 +146,7 @@ export default class Track extends React.Component {
 
   render() {
     return (
-      <div>
+      <section className='section'>
         {this.state.foodtypesOptions &&
           <div>
             <h2 className='title'>Track</h2>
@@ -244,7 +244,7 @@ export default class Track extends React.Component {
 
           </div >
         }
-      </div >
+      </section>
     );
   }
 }

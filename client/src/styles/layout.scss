@@ -55,6 +55,23 @@ input[type="checkbox"] {
   padding: 0.1rem 1rem;
 }
 
+/* Home Page */
+
+.flex-row-end {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button {
+  margin-right: 3px;
+}
+
 
 /* add food page */
 /* #addFoodTableTitle {

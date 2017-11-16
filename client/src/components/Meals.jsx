@@ -60,7 +60,7 @@ export default class Meals extends React.Component {
 
   render() {
     return (
-      <div>
+      <section className='section'>
         <h2 className='title'>Meals</h2>
         <ReactTable className="-striped"
           noDataText="No Meals Tracked Yet"
@@ -68,7 +68,7 @@ export default class Meals extends React.Component {
           columns={this.state.columns}
           defaultPageSize={this.state.defaultPageSize}
         />
-      </div>
+      </section>
     );
   }
 }
