@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 module.exports.connect = (uri) => {
   mongoose.Promise = global.Promise;
   mongoose.connect(uri, {
-    useMongoClient: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false
   });
 
   mongoose.connection.on('error', (err) => {
